@@ -8,7 +8,6 @@
 import Foundation
 
 protocol VoiceSelectionBusinessLogic: AnyObject {
-    func fetchInspirationView()
     func fetchInspirationText()
     func clearInspirationText()
 }
@@ -21,10 +20,6 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
     
     var presenter: VoiceSelectionPresentationLogic?
     var worker: VoiceSelectionWorkingLogic = VoiceSelectionWorker()
-    
-    func fetchInspirationView() {
-        presenter?.presentInspirationView()
-    }
     
     func fetchInspirationText() {
         presenter?.presentInspirationText(response: .init(inspirationText: getRandomInspiration()))

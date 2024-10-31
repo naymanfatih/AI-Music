@@ -8,7 +8,6 @@
 import Foundation
 
 protocol VoiceSelectionPresentationLogic: AnyObject {
-    func presentInspirationView()
     func presentInspirationText(response: VoiceSelection.Case.Response)
     func presentClearInspirationText()
 }
@@ -16,10 +15,6 @@ protocol VoiceSelectionPresentationLogic: AnyObject {
 final class VoiceSelectionPresenter: VoiceSelectionPresentationLogic {
     
     weak var viewController: VoiceSelectionDisplayLogic?
-    
-    func presentInspirationView() {
-        viewController?.displayInspirationView()
-    }
     
     func presentInspirationText(response: VoiceSelection.Case.Response) {
         viewController?.displayInspirationText(viewModel: .init(inspirationText: response.inspirationText))

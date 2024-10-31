@@ -18,25 +18,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qZ4-dn-N7F">
-                                <rect key="frame" x="16" y="58" width="382" height="148"/>
+                                <rect key="frame" x="16" y="58" width="382" height="142"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="R1F-uU-9Nx">
-                                        <rect key="frame" x="16" y="16" width="350" height="49.5"/>
-                                        <string key="text">Write a text and let AI turn it into a speech with
-the voice of your favorite character</string>
+                                        <rect key="frame" x="14" y="16" width="352" height="76"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="76" id="cPT-Vm-qe6"/>
+                                        </constraints>
                                         <color key="textColor" systemColor="labelColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <connections>
                                             <outlet property="delegate" destination="nxe-uw-h5I" id="oud-Zt-PCp"/>
                                         </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hz5-4F-5XI">
-                                        <rect key="frame" x="12" y="101.5" width="156" height="34.5"/>
+                                        <rect key="frame" x="12" y="96" width="146.5" height="34"/>
                                         <state key="normal" title="Get Inspiration" image="inspiration">
                                             <color key="titleColor" name="Primary Color1"/>
                                         </state>
-                                        <buttonConfiguration key="configuration" style="plain" image="inspiration" title="Get Inspiration">
+                                        <buttonConfiguration key="configuration" style="plain" image="inspiration" imagePlacement="trailing" title="Get inspiration" imagePadding="2">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
                                             <color key="baseForegroundColor" name="Primary Color1"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -44,10 +47,9 @@ the voice of your favorite character</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z5Q-a6-3j5">
-                                        <rect key="frame" x="326" y="102" width="44" height="34"/>
+                                        <rect key="frame" x="350" y="108" width="20" height="22"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="inspiration_clear"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="inspiration_clear"/>
                                         <connections>
                                             <action selector="clearInspiration" destination="nxe-uw-h5I" eventType="touchUpInside" id="koN-Ze-3li"/>
                                         </connections>
@@ -57,20 +59,28 @@ the voice of your favorite character</string>
                                 <constraints>
                                     <constraint firstItem="hz5-4F-5XI" firstAttribute="leading" secondItem="qZ4-dn-N7F" secondAttribute="leading" constant="12" id="4Qo-mX-OMY"/>
                                     <constraint firstAttribute="bottom" secondItem="z5Q-a6-3j5" secondAttribute="bottom" constant="12" id="C5f-Qz-s7h"/>
-                                    <constraint firstItem="hz5-4F-5XI" firstAttribute="top" secondItem="R1F-uU-9Nx" secondAttribute="bottom" constant="36" id="ERL-EP-zn7"/>
+                                    <constraint firstItem="hz5-4F-5XI" firstAttribute="top" secondItem="R1F-uU-9Nx" secondAttribute="bottom" constant="4" id="ERL-EP-zn7"/>
                                     <constraint firstAttribute="bottom" secondItem="hz5-4F-5XI" secondAttribute="bottom" constant="12" id="Qrb-qv-XxO"/>
-                                    <constraint firstItem="R1F-uU-9Nx" firstAttribute="leading" secondItem="qZ4-dn-N7F" secondAttribute="leading" constant="16" id="hV3-KF-ky1"/>
+                                    <constraint firstItem="R1F-uU-9Nx" firstAttribute="leading" secondItem="qZ4-dn-N7F" secondAttribute="leading" constant="14" id="hV3-KF-ky1"/>
                                     <constraint firstAttribute="trailing" secondItem="R1F-uU-9Nx" secondAttribute="trailing" constant="16" id="s2J-wk-gjq"/>
                                     <constraint firstAttribute="trailing" secondItem="z5Q-a6-3j5" secondAttribute="trailing" constant="12" id="tyQ-OA-mXl"/>
                                     <constraint firstItem="R1F-uU-9Nx" firstAttribute="top" secondItem="qZ4-dn-N7F" secondAttribute="top" constant="16" id="wcj-p7-78g"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick a Voice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hun-7G-Gpy">
+                                <rect key="frame" x="16" y="216" width="145" height="31.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="acR-sl-ate"/>
                         <color key="backgroundColor" name="System Black"/>
                         <constraints>
+                            <constraint firstItem="Hun-7G-Gpy" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="G7M-3q-WJt"/>
                             <constraint firstItem="qZ4-dn-N7F" firstAttribute="top" secondItem="acR-sl-ate" secondAttribute="top" constant="10" id="GP0-sd-dff"/>
                             <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="qZ4-dn-N7F" secondAttribute="trailing" constant="16" id="Mev-KX-GP5"/>
+                            <constraint firstItem="Hun-7G-Gpy" firstAttribute="top" secondItem="qZ4-dn-N7F" secondAttribute="bottom" constant="16" id="PeI-ql-NuY"/>
                             <constraint firstItem="qZ4-dn-N7F" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="uGl-rM-Ua3"/>
                         </constraints>
                     </view>

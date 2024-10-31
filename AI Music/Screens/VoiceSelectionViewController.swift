@@ -8,7 +8,6 @@
 import UIKit
 
 protocol VoiceSelectionDisplayLogic: AnyObject {
-    func displayInspirationView()
     func displayInspirationText(viewModel: VoiceSelection.Case.ViewModel)
     func displayClearInspirationText()
 }
@@ -51,8 +50,9 @@ final class VoiceSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "AI Voice"
-        interactor?.fetchInspirationView()
+        setupUI()
+        setupTapGesture()
+        configurePlaceholder()
     }
     
     @IBAction func getInspiration() {
@@ -62,22 +62,49 @@ final class VoiceSelectionViewController: UIViewController {
     @IBAction func clearInspiration() {
         interactor?.clearInspirationText()
     }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    private func configurePlaceholder() {
+        textView.text = Constants.VoiceSelection.placeholder
+        textView.textColor = .white.withAlphaComponent(0.5)
+    }
+    
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    private func setupUI() {
+        title = Constants.VoiceSelection.title
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .font: UIFont.boldSystemFont(ofSize: 15)
+        ]
+        let title = Constants.VoiceSelection.inspirationButtonTitle
+        let attributedTitle = NSAttributedString(string: title, attributes: attributes)
+        inspirationButton.setAttributedTitle(attributedTitle, for: .normal)
+        
+        inspirationView.layer.cornerRadius = 12
+        clearButton.isHidden = true
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
 }
 
 extension VoiceSelectionViewController: VoiceSelectionDisplayLogic {
-    func displayInspirationView() {
-        inspirationView.layer.cornerRadius = 12
-        clearButton.isHidden = true
-        textView.delegate = self
-    }
-    
     func displayInspirationText(viewModel: VoiceSelection.Case.ViewModel) {
         textView.text = viewModel.inspirationText
+        textView.textColor = .white
         clearButton.isHidden = false
     }
     
     func displayClearInspirationText() {
-        textView.text = ""
+        configurePlaceholder()
+        textView.resignFirstResponder()
         clearButton.isHidden = true
     }
 }
@@ -92,8 +119,7 @@ extension VoiceSelectionViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = Constants.VoiceSelection.placeholder
-            textView.textColor = .white.withAlphaComponent(0.5)
+            configurePlaceholder()
             clearButton.isHidden = true
         }
     }

@@ -7,6 +7,8 @@
 
 public enum Constants {
     enum VoiceSelection {
+        static let title = "AI Voice"
+        static let inspirationButtonTitle = "Get inspiration"
         static let placeholder = "Write a text and let AI turn it into a speech with the voice of your favorite character"
     }
 }
