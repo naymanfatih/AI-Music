@@ -8,8 +8,9 @@
 import UIKit
 
 protocol VoiceSelectionDisplayLogic: AnyObject {
-    func displayInspirationText(viewModel: VoiceSelection.Case.ViewModel)
+    func displayInspirationText(viewModel: VoiceSelection.Inspiration.ViewModel)
     func displayClearInspirationText()
+    func displaySelectionData(viewModel: VoiceSelection.SelectionData.ViewModel)
 }
 
 final class VoiceSelectionViewController: UIViewController {
@@ -17,9 +18,14 @@ final class VoiceSelectionViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var inspirationButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var categoryCollectionView: UICollectionView!
+    @IBOutlet weak var voiceCollectionView: UICollectionView!
     
     var interactor: VoiceSelectionBusinessLogic?
     var router: (VoiceSelectionRoutingLogic & VoiceSelectionDataPassing)?
+    
+    var categories: [VoiceSelection.Category.ViewModel] = []
+    var voices: [VoiceSelection.Voice.ViewModel] = []
     
     // MARK: Object lifecycle
     
@@ -53,6 +59,7 @@ final class VoiceSelectionViewController: UIViewController {
         setupUI()
         setupTapGesture()
         configurePlaceholder()
+        registerCells()
     }
     
     @IBAction func getInspiration() {
@@ -93,10 +100,15 @@ final class VoiceSelectionViewController: UIViewController {
         clearButton.isHidden = true
         textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
+    
+    private func registerCells() {
+        categoryCollectionView.register(CategoryCollectionViewCell.self)
+        voiceCollectionView.register(VoiceCollectionViewCell.self)
+    }
 }
 
 extension VoiceSelectionViewController: VoiceSelectionDisplayLogic {
-    func displayInspirationText(viewModel: VoiceSelection.Case.ViewModel) {
+    func displayInspirationText(viewModel: VoiceSelection.Inspiration.ViewModel) {
         textView.text = viewModel.inspirationText
         textView.textColor = .white
         clearButton.isHidden = false
@@ -106,6 +118,14 @@ extension VoiceSelectionViewController: VoiceSelectionDisplayLogic {
         configurePlaceholder()
         textView.resignFirstResponder()
         clearButton.isHidden = true
+    }
+    
+    func displaySelectionData(viewModel: VoiceSelection.SelectionData.ViewModel) {
+        voices = viewModel.voices
+        categories = viewModel.categories
+        
+        categoryCollectionView.reloadData()
+        voiceCollectionView.reloadData()
     }
 }
 
@@ -127,4 +147,36 @@ extension VoiceSelectionViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         clearButton.isHidden = textView.text.isEmpty
     }
+}
+
+extension VoiceSelectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == categoryCollectionView {
+            return categories.count
+        } else if collectionView == voiceCollectionView {
+            return voices.count
+        } else {
+            return .zero
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == categoryCollectionView {
+            let cell: CategoryCollectionViewCell = collectionView.dequeueCell(indexPath: indexPath)
+            cell.configure(viewModel: categories[indexPath.item])
+            return cell
+        } else if collectionView == voiceCollectionView {
+            let cell: VoiceCollectionViewCell = collectionView.dequeueCell(indexPath: indexPath)
+            cell.configure(viewModel: voices[indexPath.item])
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if collectionView == categoryCollectionView {
+//            
+//        }
+//    }
 }

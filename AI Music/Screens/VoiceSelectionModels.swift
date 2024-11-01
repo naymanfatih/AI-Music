@@ -9,9 +9,7 @@ import Foundation
 
 // swiftlint:disable nesting
 enum VoiceSelection {
-    
-    enum Case {
-        
+    enum Inspiration {
         struct Request {
             
         }
@@ -23,8 +21,33 @@ enum VoiceSelection {
         struct ViewModel {
             let inspirationText: String
         }
-        
     }
     
+    enum SelectionData {
+        struct Response {
+            let categories: [Category.ViewModel]
+            let voices: [Voice.ViewModel]
+        }
+        
+        struct ViewModel {
+            let categories: [Category.ViewModel]
+            let voices: [Voice.ViewModel]
+        }
+    }
+    
+    enum Category {
+        struct ViewModel {
+            let title: String
+            let isSelected: Bool
+        }
+    }
+    
+    enum Voice {
+        struct ViewModel {
+            let imageURL: URL?
+            let title: String
+            let isSelected: Bool
+        }
+    }
 }
 // swiftlint:enable nesting

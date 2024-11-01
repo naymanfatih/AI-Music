@@ -10,6 +10,7 @@ import Foundation
 protocol VoiceSelectionBusinessLogic: AnyObject {
     func fetchInspirationText()
     func clearInspirationText()
+    func fetchSelectionData ()
 }
 
 protocol VoiceSelectionDataStore: AnyObject {
@@ -27,6 +28,10 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
     
     func clearInspirationText() {
         presenter?.presentClearInspirationText()
+    }
+    
+    func fetchSelectionData() {
+        <#code#>
     }
     
     private func getRandomInspiration() -> String {
