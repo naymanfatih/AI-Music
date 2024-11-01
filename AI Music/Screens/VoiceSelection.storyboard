@@ -6,7 +6,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -75,51 +74,33 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="QqN-Zx-4Hv">
-                                <rect key="frame" x="16" y="259.5" width="382" height="42"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="259.5" width="414" height="42"/>
+                                <color key="backgroundColor" name="SystemBlack"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="FVm-La-tei"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Q84-FQ-8H5">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aao-8d-ENM">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="rFj-m3-gAb">
-                                        <rect key="frame" x="0.0" y="-43" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="i0K-hC-m8m">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="nxe-uw-h5I" id="FeM-Ny-Rs2"/>
                                     <outlet property="delegate" destination="nxe-uw-h5I" id="LPi-gj-Kru"/>
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nj2-M6-VVx">
-                                <rect key="frame" x="16" y="321.5" width="382" height="540.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="321.5" width="414" height="540.5"/>
+                                <color key="backgroundColor" name="SystemBlack"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="clK-7M-kxT">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="onO-53-uBU">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Kg0-Sy-ViY">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <connections>
                                     <outlet property="dataSource" destination="nxe-uw-h5I" id="6IO-jz-5pl"/>
                                     <outlet property="delegate" destination="nxe-uw-h5I" id="dij-GQ-hwO"/>
@@ -127,19 +108,19 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="acR-sl-ate"/>
-                        <color key="backgroundColor" name="System Black"/>
+                        <color key="backgroundColor" name="SystemBlack"/>
                         <constraints>
                             <constraint firstItem="QqN-Zx-4Hv" firstAttribute="top" secondItem="Hun-7G-Gpy" secondAttribute="bottom" constant="12" id="90R-CV-Lu4"/>
                             <constraint firstItem="Hun-7G-Gpy" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="G7M-3q-WJt"/>
                             <constraint firstItem="nj2-M6-VVx" firstAttribute="top" secondItem="QqN-Zx-4Hv" secondAttribute="bottom" constant="20" id="GHb-WE-Lpa"/>
                             <constraint firstItem="qZ4-dn-N7F" firstAttribute="top" secondItem="acR-sl-ate" secondAttribute="top" constant="10" id="GP0-sd-dff"/>
                             <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="qZ4-dn-N7F" secondAttribute="trailing" constant="16" id="Mev-KX-GP5"/>
-                            <constraint firstItem="nj2-M6-VVx" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="NUJ-IF-3BI"/>
+                            <constraint firstItem="nj2-M6-VVx" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" id="NUJ-IF-3BI"/>
                             <constraint firstItem="Hun-7G-Gpy" firstAttribute="top" secondItem="qZ4-dn-N7F" secondAttribute="bottom" constant="16" id="PeI-ql-NuY"/>
-                            <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="nj2-M6-VVx" secondAttribute="trailing" constant="16" id="ToW-DV-42y"/>
-                            <constraint firstItem="QqN-Zx-4Hv" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="Xc3-iM-Bnm"/>
+                            <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="nj2-M6-VVx" secondAttribute="trailing" id="ToW-DV-42y"/>
+                            <constraint firstItem="QqN-Zx-4Hv" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" id="Xc3-iM-Bnm"/>
                             <constraint firstItem="acR-sl-ate" firstAttribute="bottom" secondItem="nj2-M6-VVx" secondAttribute="bottom" id="Y0v-Tt-kXE"/>
-                            <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="QqN-Zx-4Hv" secondAttribute="trailing" constant="16" id="aIj-WF-3i4"/>
+                            <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="QqN-Zx-4Hv" secondAttribute="trailing" id="aIj-WF-3i4"/>
                             <constraint firstItem="qZ4-dn-N7F" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="uGl-rM-Ua3"/>
                         </constraints>
                     </view>
@@ -163,17 +144,14 @@
         <namedColor name="Primary Color1">
             <color red="0.96862745098039216" green="0.42352941176470588" blue="0.77647058823529413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="System Black">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="System Dark">
             <color red="0.13725490196078433" green="0.11764705882352941" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="SystemBlack">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

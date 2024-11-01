@@ -26,6 +26,7 @@ final class VoiceSelectionPresenter: VoiceSelectionPresentationLogic {
     }
     
     func presentSelectionData(response: VoiceSelection.SelectionData.Response) {
-        viewController?.displaySelectionData(viewModel: .init(categories: response.categories, voices: response.voices))
+        var uniqueCategories = response.categories.unique
+        viewController?.displaySelectionData(viewModel: .init(categories: uniqueCategories, voices: response.voices))
     }
 }

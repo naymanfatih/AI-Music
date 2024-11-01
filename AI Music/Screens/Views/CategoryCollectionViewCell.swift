@@ -8,16 +8,14 @@
 import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var containerStackView: UIStackView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
     func configure(viewModel: VoiceSelection.Category.ViewModel) {
         titleLabel.text = viewModel.title
         
-        containerStackView.layer.cornerRadius = 8
-        containerStackView.layer.borderColor = UIColor.primary.cgColor
-        containerStackView.layer.borderWidth = viewModel.isSelected ? 1 : 0
-        containerStackView.isLayoutMarginsRelativeArrangement = true
-        containerStackView.layoutMargins = .init(top: 0, left: 24, bottom: 24, right: 0)
+        containerView.layer.cornerRadius = 8
+        containerView.layer.borderColor = UIColor.primary.cgColor
+        containerView.layer.borderWidth = viewModel.isSelected ? 1 : 0
     }
 }

@@ -11,39 +11,43 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCollectionViewCell" id="gTV-IL-0wX" customClass="CategoryCollectionViewCell" customModule="AI_Music" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="167" height="65"/>
+            <rect key="frame" x="0.0" y="0.0" width="167" height="42"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="167" height="65"/>
+                <rect key="frame" x="0.0" y="0.0" width="167" height="42"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZg-Rt-aBE">
-                        <rect key="frame" x="0.0" y="0.0" width="167" height="65"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqj-UY-kgS">
+                        <rect key="frame" x="0.0" y="0.0" width="167" height="42"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAS-fC-J3E">
-                                <rect key="frame" x="0.0" y="0.0" width="167" height="65"/>
+                                <rect key="frame" x="65" y="12" width="37.333333333333343" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" name="SystemDark"/>
-                    </stackView>
+                        <constraints>
+                            <constraint firstItem="tAS-fC-J3E" firstAttribute="centerY" secondItem="bqj-UY-kgS" secondAttribute="centerY" id="kEh-ob-B2s"/>
+                            <constraint firstItem="tAS-fC-J3E" firstAttribute="centerX" secondItem="bqj-UY-kgS" secondAttribute="centerX" id="wCG-by-Wb2"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="MZg-Rt-aBE" secondAttribute="trailing" id="6vz-ff-zWy"/>
-                <constraint firstItem="MZg-Rt-aBE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="J6T-w4-VE3"/>
-                <constraint firstItem="MZg-Rt-aBE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Nxp-Cx-1gI"/>
-                <constraint firstAttribute="bottom" secondItem="MZg-Rt-aBE" secondAttribute="bottom" id="Szl-3g-biC"/>
+                <constraint firstItem="bqj-UY-kgS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="C03-Vy-7av"/>
+                <constraint firstAttribute="bottom" secondItem="bqj-UY-kgS" secondAttribute="bottom" id="QmN-bQ-utv"/>
+                <constraint firstAttribute="trailing" secondItem="bqj-UY-kgS" secondAttribute="trailing" id="isU-tP-ou8"/>
+                <constraint firstItem="bqj-UY-kgS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wLk-wx-0rk"/>
             </constraints>
-            <size key="customSize" width="167" height="65"/>
+            <size key="customSize" width="167" height="42"/>
             <connections>
-                <outlet property="containerStackView" destination="MZg-Rt-aBE" id="AuU-Mi-Hkb"/>
+                <outlet property="containerView" destination="bqj-UY-kgS" id="Sxb-QA-zWv"/>
                 <outlet property="titleLabel" destination="tAS-fC-J3E" id="vlQ-BO-fzE"/>
             </connections>
-            <point key="canvasLocation" x="79" y="-21"/>
+            <point key="canvasLocation" x="78.625954198473281" y="-29.577464788732396"/>
         </collectionViewCell>
     </objects>
     <resources>

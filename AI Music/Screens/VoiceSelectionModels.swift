@@ -24,9 +24,13 @@ enum VoiceSelection {
     }
     
     enum SelectionData {
+        struct Request {
+            let selectedCategoryIndex: Int
+        }
+        
         struct Response {
-            let categories: [Category.ViewModel]
-            let voices: [Voice.ViewModel]
+            var categories: [Category.ViewModel]
+            var voices: [Voice.ViewModel]
         }
         
         struct ViewModel {
@@ -36,9 +40,9 @@ enum VoiceSelection {
     }
     
     enum Category {
-        struct ViewModel {
+        struct ViewModel: Hashable {
             let title: String
-            let isSelected: Bool
+            var isSelected: Bool
         }
     }
     
@@ -46,7 +50,8 @@ enum VoiceSelection {
         struct ViewModel {
             let imageURL: URL?
             let title: String
-            let isSelected: Bool
+            var isSelected: Bool
+            let category: String
         }
     }
 }

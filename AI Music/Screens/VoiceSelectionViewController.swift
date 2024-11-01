@@ -60,6 +60,7 @@ final class VoiceSelectionViewController: UIViewController {
         setupTapGesture()
         configurePlaceholder()
         registerCells()
+        interactor?.fetchSelectionData()
     }
     
     @IBAction func getInspiration() {
@@ -87,7 +88,7 @@ final class VoiceSelectionViewController: UIViewController {
     
     private func setupUI() {
         title = Constants.VoiceSelection.title
-
+        
         let attributes: [NSAttributedString.Key: Any] = [
             .underlineStyle: NSUnderlineStyle.single.rawValue,
             .font: UIFont.boldSystemFont(ofSize: 15)
@@ -99,6 +100,14 @@ final class VoiceSelectionViewController: UIViewController {
         inspirationView.layer.cornerRadius = 12
         clearButton.isHidden = true
         textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        let categoryLayout = UICollectionViewFlowLayout()
+        categoryLayout.scrollDirection = .horizontal
+        categoryCollectionView.collectionViewLayout = categoryLayout
+        
+        let voiceLayout = UICollectionViewFlowLayout()
+        voiceLayout.scrollDirection = .vertical
+        voiceCollectionView.collectionViewLayout = voiceLayout
     }
     
     private func registerCells() {
@@ -124,8 +133,10 @@ extension VoiceSelectionViewController: VoiceSelectionDisplayLogic {
         voices = viewModel.voices
         categories = viewModel.categories
         
-        categoryCollectionView.reloadData()
-        voiceCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.categoryCollectionView.reloadData()
+            self.voiceCollectionView.reloadData()
+        }
     }
 }
 
@@ -174,9 +185,55 @@ extension VoiceSelectionViewController: UICollectionViewDelegate, UICollectionVi
         }
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if collectionView == categoryCollectionView {
-//            
-//        }
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        interactor?.selectCategory(request: .init(selectedCategoryIndex: indexPath.item))
+    }
+}
+
+extension VoiceSelectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == categoryCollectionView {
+            let title = categories[indexPath.item].title
+            let font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            let width = title.size(withAttributes: [.font: font]).width
+            return CGSize(width: width + 48, height: 42)
+        } else if collectionView == voiceCollectionView {
+            let itemsPerRow: CGFloat = 3
+            let padding: CGFloat = 16
+            let interItemSpacing: CGFloat = 12
+            
+            let availableWidth = collectionView.frame.width - (padding * 2) - (interItemSpacing * (itemsPerRow - 1))
+            let itemWidth = availableWidth / itemsPerRow
+            return CGSize(width: itemWidth, height: itemWidth + 40)
+        }
+        return CGSize(width: 0, height: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        switch collectionView {
+        case categoryCollectionView:
+            return 8
+        case voiceCollectionView:
+            return 12
+        default:
+            break
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        switch collectionView {
+        case categoryCollectionView:
+            return 0
+        case voiceCollectionView:
+            return 20
+        default:
+            break
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+      return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
 }
