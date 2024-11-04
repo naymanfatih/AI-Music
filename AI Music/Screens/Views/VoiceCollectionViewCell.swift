@@ -19,6 +19,7 @@ class VoiceCollectionViewCell: UICollectionViewCell {
         selectedImageView.isHidden = !viewModel.isSelected
         selectedImageView.layer.borderColor = UIColor.primary.cgColor
         selectedImageView.layer.borderWidth = 1
+        selectedImageView.layer.cornerRadius = 12
         
         titleLabel.text = viewModel.title
     }

@@ -12,6 +12,7 @@ protocol VoiceSelectionBusinessLogic: AnyObject {
     func clearInspirationText()
     func fetchSelectionData()
     func selectCategory(request: VoiceSelection.SelectionData.Request)
+    func selectVoice(request: VoiceSelection.SelectionData.Request)
 }
 
 protocol VoiceSelectionDataStore: AnyObject {
@@ -23,7 +24,9 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
     var presenter: VoiceSelectionPresentationLogic?
     var worker: VoiceSelectionWorkingLogic = VoiceSelectionWorker()
     
-    var voices: VoiceSelection.SelectionData.Response = .init(categories: [], voices: [])
+    var allVoices: [VoiceSelection.Voice.ViewModel] = []
+    var allCategories: [VoiceSelection.Category.ViewModel] = []
+    var filteredVoices: [VoiceSelection.Voice.ViewModel] = []
     
     func fetchInspirationText() {
         presenter?.presentInspirationText(response: .init(inspirationText: getRandomInspiration()))
@@ -33,24 +36,25 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
         presenter?.presentClearInspirationText()
     }
     
-    func fetchSelectionData() async {
+    func fetchSelectionData() {
         Task {
             do {
                 let voicesResponse = try await worker.getVoices()
                 
-                let allVoices = voicesResponse.compactMap {
-                                    VoiceSelection.Voice.ViewModel(
-                                        imageURL: URL(string: $0.imageURL ?? ""),
-                                        title: $0.name ?? "",
-                                        isSelected: false,
-                                        category: $0.category ?? ""
-                                    )
-                                }
+                allVoices = voicesResponse.compactMap {
+                    VoiceSelection.Voice.ViewModel(
+                        imageURL: URL(string: $0.imageURL ?? ""),
+                        title: $0.name ?? "",
+                        isSelected: false,
+                        category: $0.category ?? ""
+                    )
+                }
+                filteredVoices = allVoices
                 
                 var uniqueCategories = voicesResponse.map { $0.category }.unique
                 uniqueCategories.insert("All", at: 0)
                 
-                let allCategories = uniqueCategories.compactMap {
+                allCategories = uniqueCategories.compactMap {
                     VoiceSelection.Category.ViewModel(
                         title: $0 ?? "",
                         isSelected: $0 == "All"
@@ -58,8 +62,7 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
                 }
                 
                 let response = VoiceSelection.SelectionData.Response(categories: allCategories, voices: allVoices)
-                self.voices = response
-                presenter?.presentSelectionData(response: voices)
+                presenter?.presentSelectionData(response: response)
             }
             catch {
                 // TODO: Handle error
@@ -68,23 +71,37 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
     }
     
     func selectCategory(request: VoiceSelection.SelectionData.Request) {
-        let selectedCategory = voices.categories[request.selectedCategoryIndex]
+        let selectedCategory = allCategories[request.selectedIndex]
         
-        let filteredVoices: [VoiceSelection.Voice.ViewModel]
         if selectedCategory.title == "All" {
-            filteredVoices = voices.voices
+            filteredVoices = allVoices
         } else {
-            filteredVoices = voices.voices.filter {
+            filteredVoices = allVoices.filter {
                 $0.category == selectedCategory.title
             }
         }
         
-        voices.categories = voices.categories.map { category in
+        allCategories = allCategories.map { category in
             var mutableCategory = category
             mutableCategory.isSelected = (category.title == selectedCategory.title)
             return mutableCategory
         }
-        presenter?.presentSelectionData(response: .init(categories: voices.categories, voices: filteredVoices))
+        presenter?.presentSelectionData(response: .init(categories: allCategories, voices: filteredVoices))
+    }
+    
+    func selectVoice(request: VoiceSelection.SelectionData.Request) {
+        filteredVoices = filteredVoices.map { voice in
+            var mutableVoice = voice
+            mutableVoice.isSelected = false
+            return mutableVoice
+        }
+        
+        var selectedVoice = filteredVoices[request.selectedIndex]
+        selectedVoice.isSelected = true
+        
+        filteredVoices[request.selectedIndex] = selectedVoice
+        
+        presenter?.presentSelectionData(response: .init(categories: allCategories, voices: filteredVoices))
     }
     
     private func getRandomInspiration() -> String {

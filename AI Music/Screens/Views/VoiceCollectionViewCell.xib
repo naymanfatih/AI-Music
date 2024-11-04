@@ -33,16 +33,16 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="ake-Nq-15Y" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="4C1-pr-m3N"/>
-                <constraint firstItem="ake-Nq-15Y" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="AVZ-F2-spU"/>
+                <constraint firstItem="ake-Nq-15Y" firstAttribute="top" secondItem="5fb-0A-3CM" secondAttribute="top" id="6G6-KU-lfJ"/>
                 <constraint firstItem="5fb-0A-3CM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="BE7-Fs-FDl"/>
                 <constraint firstItem="dHn-Yh-Fy4" firstAttribute="top" secondItem="5fb-0A-3CM" secondAttribute="bottom" constant="8" id="Gh1-z6-0yo"/>
-                <constraint firstAttribute="trailing" secondItem="ake-Nq-15Y" secondAttribute="trailing" id="Gld-LD-aLq"/>
                 <constraint firstItem="dHn-Yh-Fy4" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="I9Z-YN-ZKw"/>
                 <constraint firstItem="5fb-0A-3CM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="K3I-Ge-ktS"/>
+                <constraint firstItem="5fb-0A-3CM" firstAttribute="bottom" secondItem="ake-Nq-15Y" secondAttribute="bottom" id="TqE-Ur-ZBK"/>
                 <constraint firstAttribute="bottom" secondItem="dHn-Yh-Fy4" secondAttribute="bottom" id="a4R-yd-HeO"/>
+                <constraint firstItem="ake-Nq-15Y" firstAttribute="leading" secondItem="5fb-0A-3CM" secondAttribute="leading" id="azp-Yl-b1m"/>
                 <constraint firstAttribute="trailing" secondItem="5fb-0A-3CM" secondAttribute="trailing" id="bjU-Tx-9r8"/>
-                <constraint firstItem="dHn-Yh-Fy4" firstAttribute="top" secondItem="ake-Nq-15Y" secondAttribute="bottom" constant="8" symbolic="YES" id="w54-tP-wPx"/>
+                <constraint firstItem="5fb-0A-3CM" firstAttribute="trailing" secondItem="ake-Nq-15Y" secondAttribute="trailing" id="wde-0p-4cv"/>
             </constraints>
             <size key="customSize" width="166" height="185"/>
             <connections>

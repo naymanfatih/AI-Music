@@ -134,6 +134,7 @@ extension VoiceSelectionViewController: VoiceSelectionDisplayLogic {
         categories = viewModel.categories
         
         DispatchQueue.main.async {
+            self.voiceCollectionView.contentOffset = .zero
             self.categoryCollectionView.reloadData()
             self.voiceCollectionView.reloadData()
         }
@@ -186,7 +187,14 @@ extension VoiceSelectionViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        interactor?.selectCategory(request: .init(selectedCategoryIndex: indexPath.item))
+        switch collectionView {
+        case categoryCollectionView:
+            interactor?.selectCategory(request: .init(selectedIndex: indexPath.item))
+        case voiceCollectionView:
+            interactor?.selectVoice(request: .init(selectedIndex: indexPath.item))
+        default:
+            break
+        }
     }
 }
 

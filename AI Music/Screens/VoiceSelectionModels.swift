@@ -25,7 +25,7 @@ enum VoiceSelection {
     
     enum SelectionData {
         struct Request {
-            let selectedCategoryIndex: Int
+            let selectedIndex: Int
         }
         
         struct Response {
