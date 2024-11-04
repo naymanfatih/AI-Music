@@ -54,5 +54,21 @@ enum VoiceSelection {
             let category: String
         }
     }
+    
+    enum Check {
+        struct Request {
+            let inspirationText: String
+        }
+        
+        struct Response {
+            let textIsEmpty: Bool
+            let isVoiceSelected: Bool
+        }
+        
+        struct ViewModel {
+            let isVoiceSelected: Bool
+            let textIsEmpty: Bool
+        }
+    }
 }
 // swiftlint:enable nesting

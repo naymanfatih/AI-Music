@@ -92,7 +92,7 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nj2-M6-VVx">
-                                <rect key="frame" x="0.0" y="321.5" width="414" height="540.5"/>
+                                <rect key="frame" x="0.0" y="321.5" width="414" height="530.5"/>
                                 <color key="backgroundColor" name="SystemBlack"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="clK-7M-kxT">
                                     <size key="itemSize" width="128" height="128"/>
@@ -106,11 +106,35 @@
                                     <outlet property="delegate" destination="nxe-uw-h5I" id="dij-GQ-hwO"/>
                                 </connections>
                             </collectionView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1u4-5t-E8F">
+                                <rect key="frame" x="0.0" y="632" width="414" height="220"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="220" id="qXq-U5-wui"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCA-OF-6sv">
+                                <rect key="frame" x="16" y="788" width="382" height="64"/>
+                                <color key="backgroundColor" name="ContinueDisabledColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="xf6-dm-cNg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="continue_" destination="nxe-uw-h5I" eventType="touchUpInside" id="3I7-JO-HZX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="acR-sl-ate"/>
                         <color key="backgroundColor" name="SystemBlack"/>
                         <constraints>
+                            <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="1u4-5t-E8F" secondAttribute="trailing" id="2kX-TN-xJD"/>
                             <constraint firstItem="QqN-Zx-4Hv" firstAttribute="top" secondItem="Hun-7G-Gpy" secondAttribute="bottom" constant="12" id="90R-CV-Lu4"/>
+                            <constraint firstItem="hCA-OF-6sv" firstAttribute="bottom" secondItem="1u4-5t-E8F" secondAttribute="bottom" id="9V9-NZ-ORG"/>
+                            <constraint firstItem="hCA-OF-6sv" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="DGB-El-vLl"/>
                             <constraint firstItem="Hun-7G-Gpy" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="G7M-3q-WJt"/>
                             <constraint firstItem="nj2-M6-VVx" firstAttribute="top" secondItem="QqN-Zx-4Hv" secondAttribute="bottom" constant="20" id="GHb-WE-Lpa"/>
                             <constraint firstItem="qZ4-dn-N7F" firstAttribute="top" secondItem="acR-sl-ate" secondAttribute="top" constant="10" id="GP0-sd-dff"/>
@@ -119,14 +143,19 @@
                             <constraint firstItem="Hun-7G-Gpy" firstAttribute="top" secondItem="qZ4-dn-N7F" secondAttribute="bottom" constant="16" id="PeI-ql-NuY"/>
                             <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="nj2-M6-VVx" secondAttribute="trailing" id="ToW-DV-42y"/>
                             <constraint firstItem="QqN-Zx-4Hv" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" id="Xc3-iM-Bnm"/>
-                            <constraint firstItem="acR-sl-ate" firstAttribute="bottom" secondItem="nj2-M6-VVx" secondAttribute="bottom" id="Y0v-Tt-kXE"/>
+                            <constraint firstItem="1u4-5t-E8F" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" id="a3Z-2M-wG3"/>
                             <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="QqN-Zx-4Hv" secondAttribute="trailing" id="aIj-WF-3i4"/>
+                            <constraint firstItem="hCA-OF-6sv" firstAttribute="bottom" secondItem="nj2-M6-VVx" secondAttribute="bottom" id="h7J-5t-Ncb"/>
+                            <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="hCA-OF-6sv" secondAttribute="trailing" constant="16" id="r87-P2-7P8"/>
+                            <constraint firstAttribute="bottom" secondItem="hCA-OF-6sv" secondAttribute="bottom" constant="44" id="shl-kM-SKB"/>
                             <constraint firstItem="qZ4-dn-N7F" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="uGl-rM-Ua3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="categoryCollectionView" destination="QqN-Zx-4Hv" id="bta-yE-Hu9"/>
                         <outlet property="clearButton" destination="z5Q-a6-3j5" id="Iot-LK-XfV"/>
+                        <outlet property="continueButton" destination="hCA-OF-6sv" id="XZJ-St-Mnn"/>
+                        <outlet property="continueButtonContainerView" destination="1u4-5t-E8F" id="71b-Ki-wcV"/>
                         <outlet property="inspirationButton" destination="hz5-4F-5XI" id="Itu-ww-7o2"/>
                         <outlet property="inspirationView" destination="qZ4-dn-N7F" id="PMP-Lh-s1O"/>
                         <outlet property="textView" destination="R1F-uU-9Nx" id="Zgw-D4-wd1"/>
@@ -141,6 +170,9 @@
     <resources>
         <image name="inspiration" width="20.5" height="20"/>
         <image name="inspiration_clear" width="20" height="20"/>
+        <namedColor name="ContinueDisabledColor">
+            <color red="0.29019607843137257" green="0.12549019607843137" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Primary Color1">
             <color red="0.96862745098039216" green="0.42352941176470588" blue="0.77647058823529413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

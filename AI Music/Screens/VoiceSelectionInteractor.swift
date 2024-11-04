@@ -13,6 +13,7 @@ protocol VoiceSelectionBusinessLogic: AnyObject {
     func fetchSelectionData()
     func selectCategory(request: VoiceSelection.SelectionData.Request)
     func selectVoice(request: VoiceSelection.SelectionData.Request)
+    func checkContinueButton(request: VoiceSelection.Check.Request)
 }
 
 protocol VoiceSelectionDataStore: AnyObject {
@@ -102,6 +103,14 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
         filteredVoices[request.selectedIndex] = selectedVoice
         
         presenter?.presentSelectionData(response: .init(categories: allCategories, voices: filteredVoices))
+    }
+    
+    func checkContinueButton(request: VoiceSelection.Check.Request) {
+        let isEmpty = request.inspirationText.isEmpty || request.inspirationText == Constants.VoiceSelection.placeholder
+        let isVoiceSelected = filteredVoices.contains {
+            $0.isSelected
+        }
+        presenter?.presentCheckContinueButton(response: .init(textIsEmpty: isEmpty, isVoiceSelected: isVoiceSelected))
     }
     
     private func getRandomInspiration() -> String {

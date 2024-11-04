@@ -11,6 +11,7 @@ protocol VoiceSelectionDisplayLogic: AnyObject {
     func displayInspirationText(viewModel: VoiceSelection.Inspiration.ViewModel)
     func displayClearInspirationText()
     func displaySelectionData(viewModel: VoiceSelection.SelectionData.ViewModel)
+    func displayCheckContinueButton(viewModel: VoiceSelection.Check.ViewModel)
 }
 
 final class VoiceSelectionViewController: UIViewController {
@@ -20,6 +21,8 @@ final class VoiceSelectionViewController: UIViewController {
     @IBOutlet weak var clearButton: UIButton!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var voiceCollectionView: UICollectionView!
+    @IBOutlet weak var continueButtonContainerView: UIView!
+    @IBOutlet weak var continueButton: UIButton!
     
     var interactor: VoiceSelectionBusinessLogic?
     var router: (VoiceSelectionRoutingLogic & VoiceSelectionDataPassing)?
@@ -54,6 +57,11 @@ final class VoiceSelectionViewController: UIViewController {
         router.dataStore = interactor
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        continueButtonContainerView.applyGradient(colors: [.black.withAlphaComponent(0.0), .black], direction: .topToBottom)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -69,6 +77,10 @@ final class VoiceSelectionViewController: UIViewController {
     
     @IBAction func clearInspiration() {
         interactor?.clearInspirationText()
+    }
+    
+    @IBAction func continue_() {
+        print("DEVAM")
     }
     
     @objc private func dismissKeyboard() {
@@ -108,6 +120,9 @@ final class VoiceSelectionViewController: UIViewController {
         let voiceLayout = UICollectionViewFlowLayout()
         voiceLayout.scrollDirection = .vertical
         voiceCollectionView.collectionViewLayout = voiceLayout
+        
+        continueButton.layer.cornerRadius = 12
+        continueButton.setTitleColor(.white.withAlphaComponent(0.5), for: .disabled)
     }
     
     private func registerCells() {
@@ -121,12 +136,14 @@ extension VoiceSelectionViewController: VoiceSelectionDisplayLogic {
         textView.text = viewModel.inspirationText
         textView.textColor = .white
         clearButton.isHidden = false
+        interactor?.checkContinueButton(request: .init(inspirationText: textView.text))
     }
     
     func displayClearInspirationText() {
         configurePlaceholder()
         textView.resignFirstResponder()
         clearButton.isHidden = true
+        interactor?.checkContinueButton(request: .init(inspirationText: textView.text))
     }
     
     func displaySelectionData(viewModel: VoiceSelection.SelectionData.ViewModel) {
@@ -134,9 +151,20 @@ extension VoiceSelectionViewController: VoiceSelectionDisplayLogic {
         categories = viewModel.categories
         
         DispatchQueue.main.async {
-            self.voiceCollectionView.contentOffset = .zero
             self.categoryCollectionView.reloadData()
             self.voiceCollectionView.reloadData()
+        }
+    }
+    
+    func displayCheckContinueButton(viewModel: VoiceSelection.Check.ViewModel) {
+        let isEnabled = !viewModel.textIsEmpty && viewModel.isVoiceSelected
+        continueButton.isEnabled = isEnabled
+        
+        if isEnabled {
+            continueButton.applyGradient(colors: [.primary, .secondary], direction: .topLeftToBottomRight, cornerRadius: 12)
+        } else {
+            continueButton.removeGradientLayers()
+            continueButton.backgroundColor = .continueDisabled
         }
     }
 }
@@ -158,6 +186,7 @@ extension VoiceSelectionViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         clearButton.isHidden = textView.text.isEmpty
+        interactor?.checkContinueButton(request: .init(inspirationText: textView.text))
     }
 }
 
@@ -192,6 +221,7 @@ extension VoiceSelectionViewController: UICollectionViewDelegate, UICollectionVi
             interactor?.selectCategory(request: .init(selectedIndex: indexPath.item))
         case voiceCollectionView:
             interactor?.selectVoice(request: .init(selectedIndex: indexPath.item))
+            interactor?.checkContinueButton(request: .init(inspirationText: textView.text))
         default:
             break
         }
@@ -212,7 +242,7 @@ extension VoiceSelectionViewController: UICollectionViewDelegateFlowLayout {
             
             let availableWidth = collectionView.frame.width - (padding * 2) - (interItemSpacing * (itemsPerRow - 1))
             let itemWidth = availableWidth / itemsPerRow
-            return CGSize(width: itemWidth, height: itemWidth + 40)
+            return CGSize(width: itemWidth, height: itemWidth + 30)
         }
         return CGSize(width: 0, height: 0)
     }
@@ -242,6 +272,6 @@ extension VoiceSelectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-      return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+      return UIEdgeInsets(top: 0, left: 16, bottom: 110, right: 16)
     }
 }

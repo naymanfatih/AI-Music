@@ -11,6 +11,7 @@ protocol VoiceSelectionPresentationLogic: AnyObject {
     func presentInspirationText(response: VoiceSelection.Inspiration.Response)
     func presentClearInspirationText()
     func presentSelectionData(response: VoiceSelection.SelectionData.Response)
+    func presentCheckContinueButton(response: VoiceSelection.Check.Response)
 }
 
 final class VoiceSelectionPresenter: VoiceSelectionPresentationLogic {
@@ -26,7 +27,11 @@ final class VoiceSelectionPresenter: VoiceSelectionPresentationLogic {
     }
     
     func presentSelectionData(response: VoiceSelection.SelectionData.Response) {
-        var uniqueCategories = response.categories.unique
+        let uniqueCategories = response.categories.unique
         viewController?.displaySelectionData(viewModel: .init(categories: uniqueCategories, voices: response.voices))
+    }
+    
+    func presentCheckContinueButton(response: VoiceSelection.Check.Response) {
+        viewController?.displayCheckContinueButton(viewModel: .init(isVoiceSelected: response.isVoiceSelected, textIsEmpty: response.textIsEmpty))
     }
 }
