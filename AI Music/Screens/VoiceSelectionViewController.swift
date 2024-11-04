@@ -164,7 +164,6 @@ extension VoiceSelectionViewController: VoiceSelectionDisplayLogic {
             continueButton.applyGradient(colors: [.primary, .secondary], direction: .topLeftToBottomRight, cornerRadius: 12)
         } else {
             continueButton.removeGradientLayers()
-            continueButton.backgroundColor = .continueDisabled
         }
     }
 }
@@ -221,10 +220,10 @@ extension VoiceSelectionViewController: UICollectionViewDelegate, UICollectionVi
             interactor?.selectCategory(request: .init(selectedIndex: indexPath.item))
         case voiceCollectionView:
             interactor?.selectVoice(request: .init(selectedIndex: indexPath.item))
-            interactor?.checkContinueButton(request: .init(inspirationText: textView.text))
         default:
             break
         }
+        interactor?.checkContinueButton(request: .init(inspirationText: textView.text))
     }
 }
 
