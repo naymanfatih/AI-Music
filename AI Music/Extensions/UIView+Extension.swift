@@ -45,4 +45,29 @@ extension UIView {
     func removeGradientLayers() {
         self.layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
     }
+    
+    func applyRadialGradient(leftColor: UIColor, rightColor: UIColor) {
+        removeGradientLayers()
+        
+        let linearGradientLayer = CAGradientLayer()
+        linearGradientLayer.colors = [leftColor.cgColor, rightColor.cgColor]
+        linearGradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        linearGradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        linearGradientLayer.frame = self.bounds
+
+        let radialGradientLayer = CAGradientLayer()
+        radialGradientLayer.type = .radial
+        radialGradientLayer.colors = [
+            UIColor.black.withAlphaComponent(1).cgColor,
+            UIColor.black.withAlphaComponent(0.0).cgColor
+        ]
+        radialGradientLayer.locations = [0.0, 1.0]
+        radialGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
+        radialGradientLayer.endPoint = CGPoint(x: 1.1, y: 1.1)
+        radialGradientLayer.frame = self.bounds
+
+        linearGradientLayer.mask = radialGradientLayer
+        
+        self.layer.insertSublayer(linearGradientLayer, at: 0)
+    }
 }

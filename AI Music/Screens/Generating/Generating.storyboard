@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nxe-uw-h5I">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Generating View Controller-->
+        <scene sceneID="D3m-6j-bBI">
+            <objects>
+                <viewController id="nxe-uw-h5I" customClass="GeneratingViewController" customModule="AI_Music" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="chM-je-gA4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bYH-bH-FdS">
+                                <rect key="frame" x="0.0" y="101" width="414" height="414"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bX4-pg-hLD">
+                                        <rect key="frame" x="89" y="89" width="236" height="236"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="236" id="dVp-hd-kwS"/>
+                                            <constraint firstAttribute="height" constant="236" id="saI-vw-j7h"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" name="SystemBlack"/>
+                                <constraints>
+                                    <constraint firstItem="bX4-pg-hLD" firstAttribute="centerX" secondItem="bYH-bH-FdS" secondAttribute="centerX" id="AvN-eQ-kWM"/>
+                                    <constraint firstItem="bX4-pg-hLD" firstAttribute="centerY" secondItem="bYH-bH-FdS" secondAttribute="centerY" id="jti-Ad-MWa"/>
+                                    <constraint firstAttribute="width" secondItem="bYH-bH-FdS" secondAttribute="height" id="zJe-bQ-Abi"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HbJ-uS-3fF">
+                                <rect key="frame" x="16" y="57" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="fLj-ak-Mns"/>
+                                    <constraint firstAttribute="height" constant="24" id="tAA-Ge-onk"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="close" destination="nxe-uw-h5I" eventType="touchUpInside" id="JkE-cx-70V"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZ9-WS-T6D">
+                                <rect key="frame" x="119" y="617" width="176.5" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It may take up to few minutes for you to receive an AI-generated speech. You can find your voice record in Library." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2Q-Vb-Q5h">
+                                <rect key="frame" x="57" y="666" width="300" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="jZy-cb-WQk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="acR-sl-ate"/>
+                        <color key="backgroundColor" name="SystemBlack"/>
+                        <constraints>
+                            <constraint firstItem="g2Q-Vb-Q5h" firstAttribute="centerX" secondItem="chM-je-gA4" secondAttribute="centerX" id="BZ1-1s-R1Y"/>
+                            <constraint firstItem="bYH-bH-FdS" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" id="Idq-IF-Xbt"/>
+                            <constraint firstItem="HbJ-uS-3fF" firstAttribute="top" secondItem="acR-sl-ate" secondAttribute="top" constant="9" id="R01-8f-bxO"/>
+                            <constraint firstItem="bZ9-WS-T6D" firstAttribute="centerX" secondItem="chM-je-gA4" secondAttribute="centerX" id="S0j-hj-jfb"/>
+                            <constraint firstItem="HbJ-uS-3fF" firstAttribute="leading" secondItem="acR-sl-ate" secondAttribute="leading" constant="16" id="aWC-W2-xVo"/>
+                            <constraint firstItem="bYH-bH-FdS" firstAttribute="top" secondItem="HbJ-uS-3fF" secondAttribute="bottom" constant="20" id="iDQ-vJ-iBS"/>
+                            <constraint firstItem="g2Q-Vb-Q5h" firstAttribute="top" secondItem="bZ9-WS-T6D" secondAttribute="bottom" constant="8" id="p8u-ms-ThP"/>
+                            <constraint firstItem="acR-sl-ate" firstAttribute="trailing" secondItem="bYH-bH-FdS" secondAttribute="trailing" id="sR3-Sl-scA"/>
+                            <constraint firstItem="bZ9-WS-T6D" firstAttribute="top" secondItem="bYH-bH-FdS" secondAttribute="bottom" constant="102" id="xQ9-eO-HzK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="HbJ-uS-3fF" id="x7S-mA-tFN"/>
+                        <outlet property="gradientView" destination="bYH-bH-FdS" id="frm-b2-YdW"/>
+                        <outlet property="videoView" destination="bX4-pg-hLD" id="dBY-eV-HkN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZo-gs-e4f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="105.79710144927537" y="27.455357142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="close" width="24" height="24"/>
+        <namedColor name="SystemBlack">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
