@@ -67,7 +67,7 @@ final class VoiceSelectionViewController: UIViewController {
         setupUI()
         setupTapGesture()
         configurePlaceholder()
-        registerCells()
+        setupCollectionView()
         interactor?.fetchSelectionData()
     }
     
@@ -112,7 +112,11 @@ final class VoiceSelectionViewController: UIViewController {
         inspirationView.layer.cornerRadius = 12
         clearButton.isHidden = true
         textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
+        continueButton.layer.cornerRadius = 12
+        continueButton.setTitleColor(.white.withAlphaComponent(0.5), for: .disabled)
+    }
+    
+    private func setupCollectionView() {
         let categoryLayout = UICollectionViewFlowLayout()
         categoryLayout.scrollDirection = .horizontal
         categoryCollectionView.collectionViewLayout = categoryLayout
@@ -121,11 +125,6 @@ final class VoiceSelectionViewController: UIViewController {
         voiceLayout.scrollDirection = .vertical
         voiceCollectionView.collectionViewLayout = voiceLayout
         
-        continueButton.layer.cornerRadius = 12
-        continueButton.setTitleColor(.white.withAlphaComponent(0.5), for: .disabled)
-    }
-    
-    private func registerCells() {
         categoryCollectionView.register(CategoryCollectionViewCell.self)
         voiceCollectionView.register(VoiceCollectionViewCell.self)
     }
