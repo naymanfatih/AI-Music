@@ -80,7 +80,7 @@ final class VoiceSelectionViewController: UIViewController {
     }
     
     @IBAction func continue_() {
-        print("DEVAM")
+        router?.routeToGenerating()
     }
     
     @objc private func dismissKeyboard() {
