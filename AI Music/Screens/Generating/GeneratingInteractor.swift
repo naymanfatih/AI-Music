@@ -9,6 +9,7 @@ import Foundation
 
 protocol GeneratingBusinessLogic: AnyObject {
     func fetchVideo()
+    func setupGradientView()
 }
 
 protocol GeneratingDataStore: AnyObject {
@@ -22,5 +23,9 @@ final class GeneratingInteractor: GeneratingBusinessLogic, GeneratingDataStore {
     
     func fetchVideo() {
         presenter?.presentVideo()
+    }
+    
+    func setupGradientView() {
+        presenter?.presentGradientView()
     }
 }

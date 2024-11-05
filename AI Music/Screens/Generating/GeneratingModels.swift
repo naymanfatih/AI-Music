@@ -5,7 +5,7 @@
 //  Created by Fatih Ömirtay Kara on 5.11.2024.
 //
 
-import Foundation
+import UIKit
 
 // swiftlint:disable nesting
 enum Generating {
@@ -24,6 +24,13 @@ enum Generating {
             let videoURL: URL
         }
         
+    }
+    
+    enum Gradient {
+        struct ViewModel {
+            let leftColor: UIColor = UIColor.primary.withAlphaComponent(0.4)
+            let rightColor: UIColor = UIColor.secondary.withAlphaComponent(0.4)
+        }
     }
     
 }

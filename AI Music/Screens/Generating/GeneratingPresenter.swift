@@ -9,6 +9,7 @@ import Foundation
 
 protocol GeneratingPresentationLogic: AnyObject {
     func presentVideo()
+    func presentGradientView()
 }
 
 final class GeneratingPresenter: GeneratingPresentationLogic {
@@ -22,5 +23,10 @@ final class GeneratingPresenter: GeneratingPresentationLogic {
         }
         let videoURL = URL(fileURLWithPath: videoPath)
         viewController?.displayVideoPlayer(viewModel: .init(videoURL: videoURL))
+    }
+    
+    func presentGradientView() {
+        let viewModel = Generating.Gradient.ViewModel.init()
+        viewController?.displayGradientView(viewModel: viewModel)
     }
 }

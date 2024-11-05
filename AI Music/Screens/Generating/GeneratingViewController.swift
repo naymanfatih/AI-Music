@@ -10,6 +10,7 @@ import AVKit
 
 protocol GeneratingDisplayLogic: AnyObject {
     func displayVideoPlayer(viewModel: Generating.Video.ViewModel)
+    func displayGradientView(viewModel: Generating.Gradient.ViewModel)
 }
 
 final class GeneratingViewController: UIViewController {
@@ -52,11 +53,7 @@ final class GeneratingViewController: UIViewController {
         super.viewDidLoad()
         
         interactor?.fetchVideo()
-        
-        gradientView.applyRadialGradient(
-            leftColor: UIColor.primary.withAlphaComponent(0.4),
-            rightColor: UIColor.secondary.withAlphaComponent(0.4)
-        )
+        interactor?.setupGradientView()
     }
     
     @IBAction func close() {
@@ -81,5 +78,12 @@ extension GeneratingViewController: GeneratingDisplayLogic {
         videoView.layer.addSublayer(playerLayer)
         
         player.play()
+    }
+    
+    func displayGradientView(viewModel: Generating.Gradient.ViewModel) {
+        gradientView.applyRadialGradient(
+            leftColor: viewModel.leftColor,
+            rightColor: viewModel.rightColor
+        )
     }
 }
