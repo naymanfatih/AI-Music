@@ -52,8 +52,9 @@ final class GeneratingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        interactor?.fetchVideo()
+        interactor?.setupLoopVideo()
         interactor?.setupGradientView()
+        interactor?.generateVideo()
     }
     
     @IBAction func close() {

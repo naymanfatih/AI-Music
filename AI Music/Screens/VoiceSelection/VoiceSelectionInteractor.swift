@@ -17,7 +17,8 @@ protocol VoiceSelectionBusinessLogic: AnyObject {
 }
 
 protocol VoiceSelectionDataStore: AnyObject {
-    
+    var selectedVoice: String? { get set }
+    var selectedInspirationText: String? { get set }
 }
 
 final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectionDataStore {
@@ -28,6 +29,8 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
     var allVoices: [VoiceSelection.Voice.ViewModel] = []
     var allCategories: [VoiceSelection.Category.ViewModel] = []
     var filteredVoices: [VoiceSelection.Voice.ViewModel] = []
+    var selectedVoice: String?
+    var selectedInspirationText: String?
     
     func fetchInspirationText() {
         presenter?.presentInspirationText(response: .init(inspirationText: getRandomInspiration()))
@@ -100,6 +103,7 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
         var selectedVoice = filteredVoices[request.selectedIndex]
         selectedVoice.isSelected = true
         
+        self.selectedVoice = selectedVoice.title
         filteredVoices[request.selectedIndex] = selectedVoice
         
         presenter?.presentSelectionData(response: .init(categories: allCategories, voices: filteredVoices))
@@ -110,6 +114,7 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
         let isVoiceSelected = filteredVoices.contains {
             $0.isSelected
         }
+        selectedInspirationText = request.inspirationText
         presenter?.presentCheckContinueButton(response: .init(textIsEmpty: isEmpty, isVoiceSelected: isVoiceSelected))
     }
     

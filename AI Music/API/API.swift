@@ -17,14 +17,14 @@ enum API {
     }
     
     case getVoices
-    case startMusicGenerate
+    case startMusicGenerate(request: StartMusicGenerateRequest)
     
     var url: String {
         switch self {
         case .getVoices:
             return "\(API.baseURL)/getVoice"
         case .startMusicGenerate:
-            return "\(API.baseURL)/getVoice/"
+            return "\(API.baseURL)/startMusicGenerate"
         }
     }
     
@@ -46,8 +46,8 @@ enum API {
         switch self {
         case .getVoices:
             return nil
-        case .startMusicGenerate:
-            return ["voiceId": ""]
+        case let .startMusicGenerate(request):
+            return request.toParameters()
         }
     }
 }
@@ -61,7 +61,7 @@ extension API {
             url,
             method: method,
             parameters: parameters,
-            encoding: URLEncoding.default,
+            encoding: JSONEncoding.default,
             headers: headers
         )
         .validate()

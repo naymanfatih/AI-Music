@@ -21,7 +21,9 @@ final class VoiceSelectionRouter: VoiceSelectionRoutingLogic, VoiceSelectionData
     var dataStore: VoiceSelectionDataStore?
     
     func routeToGenerating() {
+        guard let text = dataStore?.selectedInspirationText, let voice = dataStore?.selectedVoice else { return }
         let generatingVC: GeneratingViewController = UIApplication.getViewController()
+        generatingVC.router?.dataStore?.generateMusicRequest = .init(promp: text, cover: voice)
         viewController?.present(generatingVC, animated: true)
     }
 }
