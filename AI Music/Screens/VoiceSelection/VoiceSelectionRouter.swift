@@ -23,6 +23,7 @@ final class VoiceSelectionRouter: VoiceSelectionRoutingLogic, VoiceSelectionData
     func routeToGenerating() {
         guard let text = dataStore?.selectedInspirationText, let voice = dataStore?.selectedVoice else { return }
         let generatingVC: GeneratingViewController = UIApplication.getViewController()
+        generatingVC.modalPresentationStyle = .fullScreen
         generatingVC.router?.dataStore?.generateMusicRequest = .init(promp: text, cover: voice)
         generatingVC.router?.delegate = self
         viewController?.present(generatingVC, animated: true)

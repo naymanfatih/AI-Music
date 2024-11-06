@@ -11,5 +11,10 @@ public enum Constants {
         static let inspirationButtonTitle = "Get inspiration"
         static let placeholder = "Write a text and let AI turn it into a speech with the voice of your favorite character"
     }
+    
+    enum Result {
+        static let share = "Share"
+        static let copy = "Copy Text"
+    }
 }
         

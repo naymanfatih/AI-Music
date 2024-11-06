@@ -81,11 +81,11 @@ final class ResultViewController: UIViewController {
     }
     
     private func createMoreOptionsMenu() -> UIMenu {
-        let shareAction = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
+        let shareAction = UIAction(title: Constants.Result.share, image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
             self?.router?.shareAudioFile(self?.audioPlayer?.url)
         }
         
-        let copyTextAction = UIAction(title: "Copy Text", image: UIImage(systemName: "doc.on.doc")) { [weak self] _ in
+        let copyTextAction = UIAction(title: Constants.Result.copy, image: UIImage(systemName: "doc.on.doc")) { [weak self] _ in
             UIPasteboard.general.string = self?.promptLabel.text
         }
         
