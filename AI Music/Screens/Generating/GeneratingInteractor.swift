@@ -40,7 +40,7 @@ final class GeneratingInteractor: GeneratingBusinessLogic, GeneratingDataStore {
                 let generatedMusic = try await worker.getMusicGenerate(request: generateMusicRequest)
                 generatedMusicURL = generatedMusic.resultURL
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     self.presenter?.presentResult()
                 }
             }
