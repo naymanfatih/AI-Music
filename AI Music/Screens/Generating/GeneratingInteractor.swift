@@ -15,10 +15,12 @@ protocol GeneratingBusinessLogic: AnyObject {
 
 protocol GeneratingDataStore: AnyObject {
     var generateMusicRequest: StartMusicGenerateRequest? { get set }
+    var generatedMusicURL: String? { get set }
 }
 
 final class GeneratingInteractor: GeneratingBusinessLogic, GeneratingDataStore {
     var generateMusicRequest: StartMusicGenerateRequest?
+    var generatedMusicURL: String?
     
     var presenter: GeneratingPresentationLogic?
     var worker: GeneratingWorkingLogic = GeneratingWorker()
@@ -36,7 +38,7 @@ final class GeneratingInteractor: GeneratingBusinessLogic, GeneratingDataStore {
         Task {
             do {
                 let generatedMusic = try await worker.getMusicGenerate(request: generateMusicRequest)
-                print(generatedMusic)
+                generatedMusicURL = generatedMusic.resultURL
             }
             catch {
                 // TODO: Handle error
