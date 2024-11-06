@@ -19,6 +19,7 @@ protocol VoiceSelectionBusinessLogic: AnyObject {
 protocol VoiceSelectionDataStore: AnyObject {
     var selectedVoice: String? { get set }
     var selectedInspirationText: String? { get set }
+    var selectedVoiceImageURL: URL? { get set }
 }
 
 final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectionDataStore {
@@ -31,6 +32,7 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
     var filteredVoices: [VoiceSelection.Voice.ViewModel] = []
     var selectedVoice: String?
     var selectedInspirationText: String?
+    var selectedVoiceImageURL: URL?
     
     func fetchInspirationText() {
         presenter?.presentInspirationText(response: .init(inspirationText: getRandomInspiration()))
@@ -104,6 +106,7 @@ final class VoiceSelectionInteractor: VoiceSelectionBusinessLogic, VoiceSelectio
         selectedVoice.isSelected = true
         
         self.selectedVoice = selectedVoice.title
+        self.selectedVoiceImageURL = selectedVoice.imageURL
         filteredVoices[request.selectedIndex] = selectedVoice
         
         presenter?.presentSelectionData(response: .init(categories: allCategories, voices: filteredVoices))
