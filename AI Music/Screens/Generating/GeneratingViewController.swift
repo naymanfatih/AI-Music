@@ -11,6 +11,7 @@ import AVKit
 protocol GeneratingDisplayLogic: AnyObject {
     func displayVideoPlayer(viewModel: Generating.Video.ViewModel)
     func displayGradientView(viewModel: Generating.Gradient.ViewModel)
+    func displayResult()
 }
 
 final class GeneratingViewController: UIViewController {
@@ -86,5 +87,9 @@ extension GeneratingViewController: GeneratingDisplayLogic {
             leftColor: viewModel.leftColor,
             rightColor: viewModel.rightColor
         )
+    }
+    
+    func displayResult() {
+        router?.routeToResult()
     }
 }

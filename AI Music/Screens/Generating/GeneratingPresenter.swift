@@ -10,6 +10,7 @@ import Foundation
 protocol GeneratingPresentationLogic: AnyObject {
     func presentVideo()
     func presentGradientView()
+    func presentResult()
 }
 
 final class GeneratingPresenter: GeneratingPresentationLogic {
@@ -28,5 +29,9 @@ final class GeneratingPresenter: GeneratingPresentationLogic {
     func presentGradientView() {
         let viewModel = Generating.Gradient.ViewModel.init()
         viewController?.displayGradientView(viewModel: viewModel)
+    }
+    
+    func presentResult() {
+        viewController?.displayResult()
     }
 }

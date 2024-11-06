@@ -39,6 +39,10 @@ final class GeneratingInteractor: GeneratingBusinessLogic, GeneratingDataStore {
             do {
                 let generatedMusic = try await worker.getMusicGenerate(request: generateMusicRequest)
                 generatedMusicURL = generatedMusic.resultURL
+                
+                DispatchQueue.main.async {
+                    self.presenter?.presentResult()
+                }
             }
             catch {
                 // TODO: Handle error
