@@ -14,10 +14,6 @@ protocol GeneratingWorkingLogic: AnyObject {
 
 final class GeneratingWorker: GeneratingWorkingLogic {
     func getMusicGenerate(request: StartMusicGenerateRequest) async throws -> StartMusicGenerateResponse {
-        let url = API.startMusicGenerate(request: request).url
-        let data = try await AF.request(url, method: .post)
-            .validate()
-            .serializingDecodable(StartMusicGenerateResponse.self).value
-        return data
+        return try await API.startMusicGenerate(request: request).fetch(responseType: StartMusicGenerateResponse.self)
     }
 }

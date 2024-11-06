@@ -53,11 +53,8 @@ enum API {
 }
 
 extension API {
-    func fetch<T: Decodable>(
-        responseType: T.Type,
-        completion: @escaping (Result<T, Error>) -> Void
-    ) {
-        AF.request(
+    func fetch<T: Decodable>(responseType: T.Type) async throws -> T {
+        return try await AF.request(
             url,
             method: method,
             parameters: parameters,
@@ -65,13 +62,6 @@ extension API {
             headers: headers
         )
         .validate()
-        .responseDecodable(of: responseType) { response in
-            switch response.result {
-            case let .success(data):
-                completion(.success(data))
-            case let .failure(error):
-                completion(.failure(error))
-            }
-        }
+        .serializingDecodable(responseType).value
     }
 }

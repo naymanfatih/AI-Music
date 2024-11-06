@@ -14,10 +14,6 @@ protocol VoiceSelectionWorkingLogic: AnyObject {
 
 final class VoiceSelectionWorker: VoiceSelectionWorkingLogic {
     func getVoices() async throws -> [Voice] {
-        let url = API.getVoices.url
-        let data = try await AF.request(url, method: .post)
-            .validate()
-            .serializingDecodable(GetVoiceResponse.self).value
-        return data.objects ?? []
+        return try await API.getVoices.fetch(responseType: GetVoiceResponse.self).objects ?? []
     }
 }
